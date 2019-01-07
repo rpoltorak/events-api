@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "nodemon",
     "lint": "tslint --project .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Remek Poltorak <rpoltorak@entitive.com>",
   "license": "ISC",
@@ -16,8 +16,11 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.12",
+    "jest": "^23.6.0",
     "nodemon": "^1.18.9",
     "prettier": "^1.15.3",
+    "ts-jest": "^23.10.5",
     "tslint": "^5.12.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.17.0",
