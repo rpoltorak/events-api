@@ -12,5 +12,5 @@ export class User {
   name: string;
 
   @Column()
-  company: string;
+  companyName: string;
 }

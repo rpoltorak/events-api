@@ -1,6 +1,10 @@
 import express, { Application } from "express";
 import { createConnection } from "typeorm";
+import * as dotenv from "dotenv";
+
 import "reflect-metadata";
+
+dotenv.config();
 
 createConnection().then(async connection => {
 
@@ -10,8 +14,8 @@ createConnection().then(async connection => {
     res.send("Hello world");
   });
 
-  app.listen(process.env.PORT || 3000, async () => {
-    console.log("Example app listening on port 3000!");
+  app.listen(process.env.API_PORT || 3000, async () => {
+    console.log(`Example app listening on port ${process.env.API_PORT}!`);
   });
 
 }).catch(error => console.log("Database connection error", error));;
