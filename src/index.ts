@@ -1,17 +1,25 @@
-import express, { Application } from "express";
-import { createConnection } from "typeorm";
+import express, { Request, Response } from "express";
+import { createConnection, Connection } from "typeorm";
+import * as bodyParser from "body-parser";
 import * as dotenv from "dotenv";
-
 import "reflect-metadata";
+
+import { appRoutes } from "./routes";
 
 dotenv.config();
 
-createConnection().then(async connection => {
+createConnection().then(async (connection: Connection) => {
 
-  const app: Application = express();
+  const app = express();
 
-  app.get("/", async (req, res) => {
-    res.send("Hello world");
+  app.use(bodyParser.json());
+
+  appRoutes.forEach(route => {
+    app[route.method](route.path, (request: Request, response: Response, next: Function) => {
+      route.action(request, response)
+        .then(() => next)
+        .catch(error => next(error));
+    });
   });
 
   app.listen(process.env.API_PORT || 3000, async () => {
